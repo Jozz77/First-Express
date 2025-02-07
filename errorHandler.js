@@ -1,8 +1,11 @@
 const createError = require("http-errors");
 
-const handle404 = (req, res, next) => {
-  next(createError(404));
-};
+function handle404(req, res, next) {
+  const error = new Error("Not Found");
+  error.status = 404;
+  next(error);
+}
+
 
 const globalErrorHandler = (err, req, res, next) => {
   res.locals.message = err.message;

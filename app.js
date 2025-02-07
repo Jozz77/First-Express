@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-
+const cors = require("cors");
 
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
@@ -12,6 +12,18 @@ const app = express();
 dotenv.config();
 
 const MongoUrl = process.env.MONGO_URL;
+
+// Allow CORS for all origins (not recommended for production)
+app.use(cors());
+
+// Or specify the allowed origin (recommended for production)
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000", // Replace with your frontend URL
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true, // Include cookies if needed
+//   })
+// );
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
